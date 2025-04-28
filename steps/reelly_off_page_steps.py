@@ -34,32 +34,8 @@ def verify_off_plan_opens(context):
 
 @then('Go to the final page')
 def go_to_final_page(context):
-    clicks = 0
-    max_clicks = 63
-
-    while clicks < max_clicks:
-            next_btn = context.driver.find_element(*NEXT_BTN)
-
-            if next_btn.is_enabled():
-                next_btn.click()
-                clicks += 1
-                print(f"Clicked 'Next' {clicks} time(s)")
-                sleep(1)
-            else:
-                break
+    context.app.off_plan_page.click_next_button()
 
 @then('Go back to the first page')
 def go_back_to_first_page(context):
-    clicks = 0
-    max_clicks = 63
-
-    while clicks < max_clicks:
-        prev_page_btn = context.driver.find_element(*PREV_PAGE_BTN)
-
-        if prev_page_btn.is_enabled():
-            prev_page_btn.click()
-            clicks += 1
-            print(f"Clicked 'Next' {clicks} time(s)")
-            sleep(1)
-        else:
-            break
+    context.app.off_plan_page.click_prev_button()
