@@ -7,13 +7,15 @@ from selenium.webdriver.chrome.options import Options
 
 from app.application import Application
 
+# behave -f allure_behave.formatter:AllureFormatter -o test_results/ tests/reelly_off_plan_test.feature
+
 def browser_init(context, scenario_name):
     """
     :param context: Behave context
     """
-    # driver_path = ChromeDriverManager().install()
-    # service = Service(driver_path)
-    # context.driver = webdriver.Chrome(service=service)
+    driver_path = ChromeDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Chrome(service=service)
 
     # driver_path = GeckoDriverManager().install()
     # service = Service(driver_path)
@@ -34,19 +36,19 @@ def browser_init(context, scenario_name):
     ### BROWSERSTACK ###
     # Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
 
-    bs_user ='alinakarpenko_SQEmw1'
-    bs_key = 'ZmSssq2viGT8cuQ2zdd2'
-    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    # bs_user ='alinakarpenko_SQEmw1'
+    # bs_key = 'ZmSssq2viGT8cuQ2zdd2'
+    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
 
-    options = Options()
-    bstack_options = {
-        "os" : "Windows",
-        "osVersion" : "10",
-        'browserName': 'edge',
-        'sessionName': scenario_name,
-     }
-    options.set_capability('bstack:options', bstack_options)
-    context.driver = webdriver.Remote(command_executor=url, options=options)
+    # options = Options()
+    # bstack_options = {
+    #     "os" : "Windows",
+    #   "osVersion" : "10",
+    #    'browserName': 'edge',
+    #    'sessionName': scenario_name,
+    # }
+    # options.set_capability('bstack:options', bstack_options)
+    # context.driver = webdriver.Remote(command_executor=url, options=options)
 
 
     context.driver.maximize_window()
