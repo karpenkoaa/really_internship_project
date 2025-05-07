@@ -9,13 +9,18 @@ from app.application import Application
 
 # behave -f allure_behave.formatter:AllureFormatter -o test_results/ tests/reelly_off_plan_test.feature
 
-def browser_init(context, scenario_name):
+def browser_init(context, scenario):
     """
     :param context: Behave context
     """
-    driver_path = ChromeDriverManager().install()
-    service = Service(driver_path)
-    context.driver = webdriver.Chrome(service=service)
+    mobile_emulation = {"deviceName": "iPhone SE"}
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+    context.driver = webdriver.Chrome(options=chrome_options)
+
+    # driver_path = ChromeDriverManager().install()
+    # service = Service(driver_path)
+    # context.driver = webdriver.Chrome(service=service)
 
     # driver_path = GeckoDriverManager().install()
     # service = Service(driver_path)
@@ -69,5 +74,5 @@ def after_step(context, step):
         print('\nStep failed: ', step)
 
 
-def after_scenario(context, feature):
+def after_scenario(context, scenario):
     context.driver.quit()

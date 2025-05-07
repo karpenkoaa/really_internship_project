@@ -8,6 +8,28 @@ from steps.reelly_off_page_steps import NEXT_BTN, PREV_PAGE_BTN
 class OffPlanPage(Page):
     NEXT_BTN = (By.CSS_SELECTOR, "[wized='nextPageProperties']")
     PREV_PAGE_BTN = (By.CSS_SELECTOR, "[wized='previousPageProperties']")
+    EMAIL_FIELD = (By.ID, 'email-2')
+    PASSWORD_FIELD = (By.ID, 'field')
+    CONTINUE = (By.CSS_SELECTOR, "[wized='loginButton']")
+    NEW_OFF_PLAN_BTN = (By.CSS_SELECTOR, "[href='https://find.reelly.io/']")
+    OFF_PLAN_BTN = (By.CSS_SELECTOR, "[wized='mobileTabProperties']")
+    SECONDARY_BTN = (By.CSS_SELECTOR, "[href='https://soft.reelly.io/secondary-listings']")
+    OFF_PLAN_TOP_BTN = (By.XPATH, "//a[text()='Off-plan']")
+
+    def click_off_plan_option(self):
+        self.wait_until_visible(*self.NEW_OFF_PLAN_BTN)
+        self.click(*self.NEW_OFF_PLAN_BTN)
+        self.wait_until_visible(*self.SECONDARY_BTN)
+        self.click(*self.SECONDARY_BTN)
+        self.wait_until_visible(*self.OFF_PLAN_BTN)
+        self.click(*self.OFF_PLAN_BTN)
+
+    def login_to_the_page(self):
+        self.wait_until_visible(*self.EMAIL_FIELD)
+        self.input_text('karpenkoalina1295@gmail.com', *self.EMAIL_FIELD)
+        self.input_text('Pumunu20', *self.PASSWORD_FIELD)
+        self.click(*self.CONTINUE)
+
 
     def click_next_button(self):
         clicks = 0
